@@ -9,17 +9,20 @@ import { UserService } from '../../services/user.service';
 })
 export class UpdateUserComponent implements OnInit {
   public user: User;
+  public url;
+  public image: File;
   constructor(
     private service: UserService,
-  ) { }
+  ) {
+    this.url = service.apiURL;
+  }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('dataUser'));
     this.user = JSON.parse(localStorage.getItem('dataUser'));
   }
 
   updateUser() {
-    this.service.updateUser(this.user).subscribe( (res: any) => {
+    this.service.updateUser(this.user).subscribe((res: any) => {
       switch (res.statusCode) {
         case 500:
           alert('Error al conectarse con el servidor');
@@ -28,12 +31,24 @@ export class UpdateUserComponent implements OnInit {
           alert('Error al actualizar el usuario');
           break;
         case 200:
+
+          this.service.loadImage(this.image, this.user._id).subscribe( ( res: any) => {
+            this.user.image = res.imagen;
+            const image = this.url + '/printImage/' + this.user.image;
+            document.getElementById('image').setAttribute('src', image);
+            res.dataUser.image = this.user.image;
+            localStorage.setItem('dataUser', JSON.stringify(res.dataUser));
+          });
           alert('Usuario actualizado correctamente.');
           break;
         default:
           alert('Algo salió mal');
       }
     });
+  }
+
+  loadImage(image: any) {
+    this.image = <File>image.target.files[0];
   }
 
 }

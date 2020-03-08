@@ -57,4 +57,13 @@ export class UserService {
       options
     ).pipe(res => res);
   }
+
+  loadImage(file: File, idUser) {
+    const formData = new FormData();
+    formData.append('imagen', file);
+    return this.http.post(
+      `${this.apiURL}/loadImage/${idUser}`,
+      formData
+    ).pipe(res => res);
+  }
 }

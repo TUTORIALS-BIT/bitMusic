@@ -1,16 +1,27 @@
-<form #updateUserForm="ngForm" (ngSubmit)="updateUser();" >
-  <label for="firstName" ></label>
-  <input id="firstName" name="firstName" type="text" placeholder="Ingresa tu nombre" required #firstName="ngModel" [(ngModel)]="user.firstName" /> <br/>
+<form #updateUserForm="ngForm" (ngSubmit)="updateUser();">
+  <label for="firstName"></label>
+  <input id="firstName" name="firstName" type="text" placeholder="Ingresa tu nombre" required #firstName="ngModel"
+    [(ngModel)]="user.firstName" /> <br />
 
-  <label for="lastName" ></label>
-  <input id="lastName" name="lastName" type="text" placeholder="Ingresa tu apellido" required #lastName="ngModel" [(ngModel)]="user.lastName" /> <br/>
+  <label for="lastName"></label>
+  <input id="lastName" name="lastName" type="text" placeholder="Ingresa tu apellido" required #lastName="ngModel"
+    [(ngModel)]="user.lastName" /> <br />
 
-  <label for="email" ></label>
-  <input id="email" name="email" type="email" placeholder="Ingresa tu email" required #email="ngModel" [(ngModel)]="user.email" /> <br/>
+  <label for="email"></label>
+  <input id="email" name="email" type="email" placeholder="Ingresa tu email" required #email="ngModel"
+    [(ngModel)]="user.email" /> <br />
 
-  <label for="password" ></label>
-  <input id="password" name="password" type="password" placeholder="Ingresa tu contraseña" required #password="ngModel" [(ngModel)]="user.password" /> <br/>
+  <label for="password"></label>
+  <input id="password" name="password" type="password" placeholder="Ingresa tu contraseña" required #password="ngModel"
+    [(ngModel)]="user.password" /> <br />
 
-  <br/><br/>
+  <input type="file" class="form-control-file" id="imagen" accept="image/*" placeholder="Subir imagen" required
+    (change)="loadImage($event)">
+  Imagen----> {{user.image}}
+  <img src="{{ url + '/printImage/' + user.image}}"
+      name="image" id="image" width="150" height="150" />
+
+
+  <br /><br />
   <button type="submit"> Registrarse </button>
 </form>
