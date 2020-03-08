@@ -6,7 +6,7 @@ export class UserService {
   apiURL = 'http://localhost:3000/api';
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   /**
    * @param userParams: Parametro que recibe todos los valores que vienen desde nuestro componente.
@@ -14,31 +14,47 @@ export class UserService {
    */
   signUp(userParams) {
     const params = JSON.stringify(userParams); // Creamos una nueva variable la cual contendrá los parametros del usuario.
-    const options = { headers: new HttpHeaders( { 'Content-Type': 'application/json' } ) }; // Enviaremos los datos en un JSON.
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }; // Enviaremos los datos en un JSON.
     return this.http.post(
       this.apiURL + '/createUser', // Esta es la ruta que tenemos configurado en la API.
       params,
       options
-    ).pipe( res => res );
+    ).pipe(res => res);
   }
 
   login(userParams) {
     const params = JSON.stringify(userParams);
-    const options = { headers: new HttpHeaders( { 'Content-Type': 'application/json' } ) };
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.post(
       this.apiURL + '/loginUser',
       params,
       options
-    ).pipe( res => res );
+    ).pipe(res => res);
   }
 
   updateUser(userParams) {
     const params = JSON.stringify(userParams);
-    const options = { headers: new HttpHeaders( { 'Content-Type': 'application/json' } ) };
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.put(
       `${this.apiURL}/updateUser/${userParams._id}`,
       params,
       options
-    ).pipe( res => res );
+    ).pipe(res => res);
+  }
+
+  getAllUsers() {
+    const options = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) };
+    return this.http.get(
+      `${this.apiURL}/getUsers`,
+      options
+    ).pipe(res => res);
+  }
+
+  removeUser(idUser) {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.delete(
+      `${this.apiURL}/removeUser/${idUser}`,
+      options
+    ).pipe(res => res);
   }
 }

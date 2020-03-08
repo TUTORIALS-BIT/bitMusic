@@ -1,0 +1,12 @@
+<table id='allUsersTable'>
+  <tr>
+    <th>Nombres</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <tr *ngFor=" let user of users " id={{user._id}} >
+    <td class="" > {{ user.firstName }} {{ user.lastName }} </td>
+    <td> {{ user.email }} </td>
+    <td> <button (click)="removeUser(user._id);">Delete</button> </td>
+  </tr>
+</table>

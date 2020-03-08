@@ -9,13 +9,15 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { UserService } from './services/user.service';
 import { LoginComponent } from './components/login/login.component';
-import { UpdateUserComponent } from './components/update-user/update-user.component'; // Importamos el servicio de user.
+import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { AllUsersComponent } from './components/all-users/all-users.component'; // Importamos el servicio de user.
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     LoginComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    AllUsersComponent
   ],
   imports: [
     BrowserModule,
